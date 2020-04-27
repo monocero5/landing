@@ -1,4 +1,4 @@
-# IBM Cloud App ID
+# Monoceros using IBM Cloud App ID
 Node Sample Template App for the IBM Cloud App ID service. The App ID Dashboard overwrites the manifest.yml and localdev-config.json files with the user's information when they download a Node sample app. When downloaded, you can either run the application locally or in IBM Cloud.
 
 [![IBM Cloud powered][img-ibmcloud-powered]][url-ibmcloud]
