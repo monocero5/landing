@@ -55,6 +55,8 @@ Use the link http://localhost:3000 to load the web application in browser.
 
 You can find a running system to test at [welcome.seeone.io](https://welcome.seeonee.io/)
 
+The data used in the live demo can be found here: [dummy data](https://drive.google.com/drive/folders/13IV-g2vblpzRwJxzZrQmLWwCxGdTQfJG?usp=sharing)
+
 ## Deployment
 
 **Important:** Before going live, remove http://localhost:3000/* from the list of web redirect URLs located in "Manage Authentication" -> "Authentication Settings" page in the AppID dashboard.
