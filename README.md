@@ -1,33 +1,43 @@
-# Monoceros using IBM Cloud App ID
-Node Sample Template App for the IBM Cloud App ID service. The App ID Dashboard overwrites the manifest.yml and localdev-config.json files with the user's information when they download a Node sample app. When downloaded, you can either run the application locally or in IBM Cloud.
-
-[![IBM Cloud powered][img-ibmcloud-powered]][url-ibmcloud]
-[![Node Badge][img-node-badge]][url-node-badge]
-[![Travis][img-travis-master]][url-travis-master]
-[![Coveralls][img-coveralls-master]][url-coveralls-master]
-[![Codacy][img-codacy]][url-codacy]
-
-[![GithubWatch][img-github-watchers]][url-github-watchers]
-[![GithubStars][img-github-stars]][url-github-stars]
-[![GithubForks][img-github-forks]][url-github-forks]
-
-## Table of Contents
-* [Contents](#contents)
-* [Requirements](#requirements)
-* [Running Locally](#running-locally)
-* [Running in IBM Cloud](#running-in-ibm-cloud)
-* [Clarification](#clarification)
-* [License](#license)
+# Monoceros
 
 ## Contents
 
-`app.js`  Uses Express to set the routes.
+1. [Short description](#short-description)
+1. [Demo video](#demo-video)
+1. [The architecture](#the-architecture)
+1. [Getting started](#getting-started)
+1. [Deployment](#deployment)
+1. [Live demo](#live-demo)
+1. [Built with](#built-with)
+1. [Contributing](#contributing)
+1. [Authors](#authors)
+1. [License](#license)
 
-`public/index.html`  The application landing page. Click **Login** to start.
+## Short description
 
-`protected/protected.html`  The application's protected page. After clicking the **Login** button, the user is redirected here. This is where
-we check whether the user is authorized or not. In the case where the user is not authorized, we send a request to the
-authentication server to start the OAuth flow. If the user is authorized, we show the protected data.
+### What's the problem?
+
+The World Humanitarian Summit set a goal of increasing transparency and insight of the supply chain processes in the ‘Agenda for Humanity. Supply chain is a key enabler for one of the NGOs’ major missions: distributing drugs, vaccines and food. To succeed, they need to reach the right place at the right time, but if dealing with an inefficient system, they may incur in severe human and monetary losses, as supply chain spending accounts for ~70% of operational costs.
+
+### How can technology help? 
+
+Data is at the core of the supply chain and inventory management. But if not done right, data issues can have dramatic consequences especially in emergency response such as for COVID-19, where resources are limited and logistics is challenging.
+
+Technology can help to bridge the current data-gap by:
+
+* automatically monitoring warehouse without requiring additional training or infrastructure changes.
+* simplifying data collection over the whole supply-chain, giving managers a complete visibility on what is happening where along the entire journey, allowing them to optimise the resources.
+* detecting in real-time any issue such as delays, variations in storage conditions and theft.
+
+### The idea
+
+Our technology is a user-centric, cost-efficient platform adaptable to any mission’s type, specifically designed to collect relevant data and turn them into actionable insights. Our smart technology uses an AI-powered sensor to autonomously updates the inventory levels and send you real-time alerts such as delays in the delivery, conditions breaching the limits and theft.
+
+Schools and teachers can continue to engage with their students through virtual classrooms, and even create interactive spaces for classes. As parents face a new situation where they may need to homeschool their children, finding appropriate online resources is important as well.
+
+## Getting started
+
+These instructions will get you a copy of the project up and running on your local machine for development and testing purposes. See deployment for notes on how to deploy the project on a live system.
 
 ## Requirements
 * Node 6.0.0 or higher
@@ -41,13 +51,11 @@ npm start
 ```
 Use the link http://localhost:3000 to load the web application in browser.
 
-## Running in Cloud Foundry
+## Live demo
 
-### Prerequisites
-Before you begin, make sure that IBM Cloud CLI is installed.
-For more information visit: https://cloud.ibm.com/docs/cli?topic=cloud-cli-getting-started.
+You can find a running system to test at [welcome.seeone.io](https://welcome.seeonee.io/)
 
-### Deployment
+## Deployment
 
 **Important:** Before going live, remove http://localhost:3000/* from the list of web redirect URLs located in "Manage Authentication" -> "Authentication Settings" page in the AppID dashboard.
 
@@ -85,104 +93,24 @@ For more information visit: https://cloud.ibm.com/docs/cli?topic=cloud-cli-getti
 
 7. Open your IBM Cloud app route in the browser.
 
-## Running in Kubernetes
+## Built with
 
-### Prerequisites
-Before you begin make sure that IBM Cloud CLI, docker and kubectl installed and that you have a running kubernetes cluster.
-You also need an IBM Cloud container registry namespace (see https://cloud.ibm.com/kubernetes/registry/main/start). You can find your registry domain and repository namespace using `ibmcloud cr namespaces`.
+* [IBM App ID](https://cloud.ibm.com/catalog?search=app%20id#search_results) - The Oauth
+* [IBM Cloud Foundry](https://cloud.ibm.com/catalog?search=Cloud%20Foundry#search_results) - PaaS
+* [IBM Cloud Delivery](https://cloud.ibm.com/catalog?search=CDN#search_results) - Distribute the content and add encryption
+* [Grafana](http://www.dropwizard.io/1.0.2/docs/) - The dashboards
 
-### Deployment
+## Contributing
 
-**Important:** Before going live, remove http://localhost:3000/* from the list of web redirect URLs located in "Manage Authentication" -> "Authentication Settings" page in the AppID dashboard.
+Please read [CONTRIBUTING.md](CONTRIBUTING.md) for details on our code of conduct, and the process for submitting pull requests to us.
 
-**Note:** Your App ID instance name must consist of lower case alphanumeric characters, '-' or '.', and must start and end with an alphanumeric character. You can visit the App ID dashboard to change your instance name. 
+## Authors
 
-1. Login to IBM Cloud.
+* **Dorian Vetrila** 
+* **Théophile Griveau-Billion**
 
-    `ibmcloud login -a https://api.{{domain}}`
-  
-2. Run the following command, it will output an export command.
-
-    `ibmcloud cs cluster-config {CLUSTER_NAME}`
-    
-3. Set the KUBECONFIG environment variable. Copy the output from the previous command and paste it in your terminal. The command output looks similar to the following example:
-   
-    `export KUBECONFIG=/Users/$USER/.bluemix/plugins/container-service/clusters/mycluster/kube-config-hou02-mycluster.yml`
-
-4. Bind the instance of App ID to your cluster.
-
-    `ibmcloud cs cluster-service-bind {CLUSTER_NAME} default {APP_ID_INSTANCE_NAME}`
-    
-5. Find your cluster's public endpoint {CLUSTER_ENDPOINT}.
-   
-   Note: If you are using the free version of kubernetes (with only 1 worker node) you can use your node's public IP instead, which you can find using:
-
-    `ibmcloud cs workers {CLUSTER_NAME}`
-
-6. Edit the kube_deployment.yml file. 
-    1. Edit the image field of the deployment section to match your image name. The name of your image should be `{REGISTRY_DOMAIN}/{REPOSITORY_NAMESPACE}/appid-node-sample:{APP_VERSION}`). 
-    2. Edit the Binding name field to match yours. It should be `binding-{APP_ID_INSTANCE_NAME}`.
-    3. Edit redirectUri's value to include your cluster's IP. The value should be `http://{CLUSTER_ENDPOINT}/ibm/cloud/appid/callback`
-    4. Optional: Change the value of metadata.namespace from default to your cluster namespace if you’re using a different namespace.
-
-7. Build your Docker image.
-   
-    `docker build -t {REGISTRY_DOMAIN}/{REPOSITORY_NAMESPACE}/appid-node-sample:{APP_VERSION} .`
-    
-8. Push the image.
-   
-    `docker push {REGISTRY_DOMAIN}/{REPOSITORY_NAMESPACE}/appid-node-sample:{APP_VERSION}`
-   
-    `kubectl apply -f kube_deployment.yml`
-
-9. Now configure the OAuth redirect URL at the App ID dashboard so it will approve redirecting to your cluster. Go to your App ID instance at [IBM Cloud console](https://cloud.ibm.com/resources) and under Manage Authentication->Authentication Settings->Add web redirect URLs add the following URL:
-
-   `https://{CLUSTER_ENDPOINT}:30000/ibm/cloud/appid/callback`
-
-10. You can see your sample running on Kubernetes in IBM Cloud.
-   
-    `open http://{CLUSTER_ENDPOINT}:30000`
-
-## Clarification
-This sample runs on one instance and uses the session to store the authorization data.
-In order to run it in production mode, use services such as Redis to store the relevant data.
-
-
-## Got Questions?
-Join us on [Slack](https://www.ibm.com/cloud/blog/announcements/get-help-with-ibm-cloud-app-id-related-questions-on-slack) and chat with our dev team.
-
-## See More
-#### Protecting Node.js Web Applications with IBM Cloud App ID
-https://www.youtube.com/watch?v=6roa1ZOvwtw
+See also the list of [contributors](https://github.com/Code-and-Response/Project-Sample/graphs/contributors) who participated in this project.
 
 ## License
 
-Copyright (c) 2019 IBM Corporation
-
-Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
-
-The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
-
-THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
-
-[img-ibmcloud-powered]: https://img.shields.io/badge/ibm%20cloud-powered-blue.svg
-[url-ibmcloud]: https://www.ibm.com/cloud/
-
-[img-node-badge]: https://img.shields.io/badge/platform-node-lightgrey.svg?style=flat
-[url-node-badge]: https://developer.node.com/index.html
-
-[img-travis-master]: https://travis-ci.org/ibm-cloud-security/app-id-sample-node.svg?branch=master
-[url-travis-master]: https://travis-ci.org/ibm-cloud-security/app-id-sample-node?branch=master
-
-[img-coveralls-master]: https://coveralls.io/repos/github/ibm-cloud-security/app-id-sample-node/badge.svg
-[url-coveralls-master]: https://coveralls.io/github/ibm-cloud-security/app-id-sample-node
-
-[img-codacy]: https://api.codacy.com/project/badge/Grade/fb042b4cb2f048968b567cde2251edcc
-[url-codacy]: https://www.codacy.com/app/ibm-cloud-security/app-id-sample-node
-
-[img-github-watchers]: https://img.shields.io/github/watchers/ibm-cloud-security/app-id-sample-node.svg?style=social&label=Watch
-[url-github-watchers]: https://github.com/ibm-cloud-security/app-id-sample-node/watchers
-[img-github-stars]: https://img.shields.io/github/stars/ibm-cloud-security/app-id-sample-node.svg?style=social&label=Star
-[url-github-stars]: https://github.com/ibm-cloud-security/app-id-sample-node/stargazers
-[img-github-forks]: https://img.shields.io/github/forks/ibm-cloud-security/app-id-sample-node.svg?style=social&label=Fork
-[url-github-forks]: https://github.com/ibm-cloud-security/app-id-sample-node/network
+This project is licensed under the Apache 2 License - see the [LICENSE](LICENSE) file for details
