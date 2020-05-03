@@ -53,6 +53,8 @@ Use the link http://localhost:3000 to load the web application in browser.
 
 ## Live demo
 
+[![Watch the video](https://img.youtube.com/vi/pVBU1RJazkc/maxresdefault.jpg)](https://youtu.be/pVBU1RJazkc)
+
 You can find a running system to test at [welcome.seeone.io](https://welcome.seeonee.io/)
 
 The data used in the live demo can be found here: [dummy data](https://drive.google.com/drive/folders/13IV-g2vblpzRwJxzZrQmLWwCxGdTQfJG?usp=sharing)
