@@ -15,6 +15,8 @@
 
 ## Short description
 
+[![Watch the video](https://img.youtube.com/vi/6CEZeE1kj7k/maxresdefault.jpg)](https://youtu.be/pVBU1RJazkc)
+
 ### What's the problem?
 
 The World Humanitarian Summit set a goal of increasing transparency and insight of the supply chain processes in the ‘Agenda for Humanity. Supply chain is a key enabler for one of the NGOs’ major missions: distributing drugs, vaccines and food. To succeed, they need to reach the right place at the right time, but if dealing with an inefficient system, they may incur in severe human and monetary losses, as supply chain spending accounts for ~70% of operational costs.
