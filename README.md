@@ -15,7 +15,7 @@
 
 ## Short description
 
-[![Watch the video](https://img.youtube.com/vi/6CEZeE1kj7k/maxresdefault.jpg)](https://youtu.be/pVBU1RJazkc)
+[![Watch the video](https://img.youtube.com/vi/6CEZeE1kj7k/maxresdefault.jpg)](https://www.youtube.com/watch?v=6CEZeE1kj7k)
 
 ### What's the problem?
 
